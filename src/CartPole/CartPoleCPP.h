@@ -6,7 +6,7 @@
 #define CPPGYM_CARTPOLECPP_H
 
 
-#include "EnvCPP.h"
+#include "../EnvCPP.h"
 #include <tuple>
 
 class CartPoleCPP : public EnvCPP<float, 4> {

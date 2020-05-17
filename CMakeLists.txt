@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 add_subdirectory(pybind11)
 
 pybind11_add_module(_CartPole
-        src/binder.cpp
+        src/CartPole/CartPoleBinder.cpp
         src/EnvCPP.h
-        src/CartPoleCPP.h
-        src/CartPoleCPP.cpp)
+        src/CartPole/CartPoleCPP.h
+        src/CartPole/CartPoleCPP.cpp)
