@@ -68,8 +68,7 @@ setup(
     description='A reimplementation of some of OpenAI gym\' environments',
     long_description='A reimplementation of some of OpenAI gym\' environments with a focus on performance',
     packages=['cppgym'],
-    ext_modules=[CMakeExtension('cppgym.CartPoleCPP')],
-    #py_modules=['cppgym.CartPole'],
+    ext_modules=[CMakeExtension('cppgym.CartPoleCPP'), CMakeExtension('cppgym.MountainCarCPP')],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
     install_requires=[

@@ -9,35 +9,35 @@
 #include <random>
 #include <cstdint>
 
-template <typename T, int N>
+template <typename StateType, typename ActionType, int StateSize>
 class EnvCPP {
 protected:
     std::mt19937 _ran_generator;
-    std::array<T, N> _state{0};
+    std::array<StateType, StateSize> _state{0};
     uint32_t _seed;
 
 public:
     EnvCPP();
     void set_seed(uint32_t seed);
     uint32_t get_seed();
-    virtual std::tuple<std::array<T, N>, T, bool> step(int8_t action) = 0;
-    virtual std::array<T, N> reset() = 0;
+    virtual std::tuple<std::array<StateType, StateSize>, float, bool> step(ActionType action) = 0;
+    virtual std::array<StateType, StateSize> reset() = 0;
 };
 
 // -- Implementation --
 
-template <typename T, int N>
-EnvCPP<T, N>::EnvCPP() : _seed((std::random_device())()) {
+template <typename StateType, typename ActionType, int StateSize>
+EnvCPP<StateType, ActionType, StateSize>::EnvCPP() : _seed((std::random_device())()) {
     _ran_generator = std::mt19937(_seed);
 }
 
-template <typename T, int N>
-void EnvCPP<T, N>::set_seed(uint32_t seed) {
+template <typename StateType, typename ActionType, int StateSize>
+void EnvCPP<StateType, ActionType, StateSize>::set_seed(uint32_t seed) {
     _ran_generator = std::mt19937(seed);
 }
 
-template <typename T, int N>
-uint32_t EnvCPP<T, N>::get_seed() {
+template <typename StateType, typename ActionType, int StateSize>
+uint32_t EnvCPP<StateType, ActionType, StateSize>::get_seed() {
     return _seed;
 }
 

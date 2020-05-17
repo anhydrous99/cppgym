@@ -7,7 +7,7 @@
 #include <cassert>
 #include <cmath>
 
-CartPoleCPP::CartPoleCPP() : EnvCPP<float, 4>() {}
+CartPoleCPP::CartPoleCPP() : EnvCPP<float, int8_t, 4>() {}
 
 std::tuple<std::array<float, 4>, float, bool> CartPoleCPP::step(int8_t action) {
     assert(action == -1 || action == 1);
