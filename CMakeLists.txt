@@ -21,3 +21,9 @@ pybind11_add_module(_MountainCarContinuous
         src/MountainCarContinuous/MountainCarContinuousBinder.cpp
         src/MountainCarContinuous/MountainCarContinuousCPP.h
         src/MountainCarContinuous/MountainCarContinuousCPP.cpp)
+
+pybind11_add_module(_Pendulum
+        src/EnvCPP.h
+        src/Pendulum/PendulumBinder.cpp
+        src/Pendulum/PendulumCPP.h
+        src/Pendulum/PendulumCPP.cpp)
