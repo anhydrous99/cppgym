@@ -48,6 +48,14 @@ def main():
     score, time = env_test(mountaincar_cpp, n_episodes)
     print(f'gym: score - {score} - time - {time * 1000} ms')
 
+    print('MountainCarContinuous-v0')
+    mountaincar_gym = gym.envs.make('MountainCarContinuous-v0')
+    score, time = env_test(mountaincar_gym, n_episodes)
+    print(f'gym: score - {score} - time - {time * 1000} ms')
+    mountaincar_cpp = cppgym.make('MountainCarContinuous-v0')
+    score, time = env_test(mountaincar_cpp, n_episodes)
+    print(f'gym: score - {score} - time - {time * 1000} ms')
+
 
 if __name__ == "__main__":
     main()

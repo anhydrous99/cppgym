@@ -15,3 +15,9 @@ pybind11_add_module(_MountainCar
         src/MountainCar/MountainCarBinder.cpp
         src/MountainCar/MountainCarCPP.h
         src/MountainCar/MountainCarCPP.cpp)
+
+pybind11_add_module(_MountainCarContinuous
+        src/EnvCPP.h
+        src/MountainCarContinuous/MountainCarContinuousBinder.cpp
+        src/MountainCarContinuous/MountainCarContinuousCPP.h
+        src/MountainCarContinuous/MountainCarContinuousCPP.cpp)

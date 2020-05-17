@@ -8,7 +8,7 @@
 #include "../EnvCPP.h"
 
 class MountainCarCPP : public EnvCPP<float, int8_t, 2> {
-    std::uniform_real_distribution<float> dist{-0.6, 0.4};
+    std::uniform_real_distribution<float> dist{-0.6, -0.4};
 public:
     const float min_position = -1.2;
     const float max_position = 0.6;

@@ -1,4 +1,4 @@
-from ._MountainCar import MountainCarCPP
+from ._MountainCarContinuous import MountainCarContinuousCPP
 
 import gym
 import math
@@ -7,7 +7,7 @@ import numpy as np
 from gym import spaces
 
 
-class MountainCar(gym.Env):
+class MountainCarContinuous(gym.Env):
     metadata = {
         'render.modes': ['human', 'rgb_array'],
         'video.frames_per_second': 30
@@ -16,16 +16,29 @@ class MountainCar(gym.Env):
     def __init__(self, goal_velocity=0):
         if not isinstance(goal_velocity, float):
             goal_velocity = float(goal_velocity)
-        self.env = MountainCarCPP(goal_velocity)
+        self.env = MountainCarContinuousCPP(goal_velocity)
 
-        self.low = np.array([self.env.min_position, -self.env.max_speed], dtype=np.float32)
-        self.high = np.array([self.env.max_position, self.env.max_speed], dtype=np.float32)
+        self.low_state = np.array(
+            [self.env.min_position, -self.env.max_speed], dtype=np.float32
+        )
+        self.high_state = np.array(
+            [self.env.max_position, self.env.max_speed], dtype=np.float32
+        )
 
         self.viewer = None
         self.state = None
 
-        self.action_space = spaces.Discrete(3)
-        self.observation_space = spaces.Box(self.low, self.high, dtype=np.float32)
+        self.action_space = spaces.Box(
+            low=self.env.min_action,
+            high=self.env.max_action,
+            shape=(1,),
+            dtype=np.float32
+        )
+        self.observation_space = spaces.Box(
+            low=self.low_state,
+            high=self.high_state,
+            dtype=np.float32
+        )
 
     def seed(self, seed=None):
         if seed is None:
@@ -36,9 +49,7 @@ class MountainCar(gym.Env):
             self.env.set_seed(seed)
             return [seed]
 
-    def step(self, action):
-        if not isinstance(action, ctypes.c_int8):
-            action = ctypes.c_int8(action).value
+    def step(self, action: float):
         state, reward, done = self.env.step(action)
         self.state = np.array(state)
         return self.state, reward, done, {}
@@ -50,7 +61,7 @@ class MountainCar(gym.Env):
     @staticmethod
     def _height(xs):
         return np.sin(3 * xs) * .45 + .55
-    
+
     def render(self, mode='human'):
         screen_width = 600
         screen_height = 400
@@ -73,7 +84,7 @@ class MountainCar(gym.Env):
 
             clearance = 10
 
-            l,r,t,b = -carwidth/2, carwidth/2, carheight, 0
+            l,r,t,b = -carwidth / 2, carwidth / 2, carheight, 0
             car = rendering.FilledPolygon([(l, b), (l, t), (r, t), (r, b)])
             car.add_attr(rendering.Transform(translation=(0, clearance)))
             self.cartrans = rendering.Transform()
@@ -81,20 +92,26 @@ class MountainCar(gym.Env):
             self.viewer.add_geom(car)
             frontwheel = rendering.make_circle(carheight / 2.5)
             frontwheel.set_color(.5, .5, .5)
-            frontwheel.add_attr(rendering.Transform(translation=(carwidth / 4, clearance)))
+            frontwheel.add_attr(
+                rendering.Transform(translation=(carwidth / 4, clearance))
+            )
             frontwheel.add_attr(self.cartrans)
             self.viewer.add_geom(frontwheel)
             backwheel = rendering.make_circle(carheight / 2.5)
-            backwheel.add_attr(rendering.Transform(translation=(-carwidth / 4, clearance)))
+            backwheel.add_attr(
+                rendering.Transform(translation=(-carwidth / 4, clearance))
+            )
             backwheel.add_attr(self.cartrans)
             backwheel.set_color(.5, .5, .5)
             self.viewer.add_geom(backwheel)
-            flagx = (self.env.goal_position - self.env.min_position) * scale
-            flagy1 = self._height(self.env.goal_position) * scale
+            flagx = (self.env.goal_position-self.env.min_position)*scale
+            flagy1 = self._height(self.env.goal_position)*scale
             flagy2 = flagy1 + 50
             flagpole = rendering.Line((flagx, flagy1), (flagx, flagy2))
             self.viewer.add_geom(flagpole)
-            flag = rendering.FilledPolygon([(flagx, flagy2), (flagx, flagy2 - 10), (flagx + 25, flagy2 - 5)])
+            flag = rendering.FilledPolygon(
+                [(flagx, flagy2), (flagx, flagy2 - 10), (flagx + 25, flagy2 - 5)]
+            )
             flag.set_color(.8, .8, 0)
             self.viewer.add_geom(flag)
         pos = self.state[0]
@@ -102,10 +119,6 @@ class MountainCar(gym.Env):
         self.cartrans.set_rotation(math.cos(3 * pos))
 
         return self.viewer.render(return_rgb_array=mode == 'rgb_array')
-
-    @staticmethod
-    def get_keys_to_action():
-        return {(): 1, (276,): 0, (275,): 2, (275, 276): 1}  # control with left and right arrow keys 
 
     def close(self):
         if self.viewer:
