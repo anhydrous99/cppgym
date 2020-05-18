@@ -6,6 +6,9 @@ add_subdirectory(pybind11)
 
 include(CheckCXXSymbolExists)
 check_cxx_symbol_exists(sincosf "math.h" HAVE_SINCOSF)
+if (HAVE_SINCOSF)
+    add_definitions(-DHAVE_SINCOSF)
+endif ()
 
 pybind11_add_module(_CartPole
         src/EnvCPP.h
