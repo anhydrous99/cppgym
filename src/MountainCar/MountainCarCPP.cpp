@@ -5,7 +5,6 @@
 #include <algorithm>
 #include <cassert>
 #include <tuple>
-#include <cmath>
 #include "MountainCarCPP.h"
 
 MountainCarCPP::MountainCarCPP(float goal_velocity) : EnvCPP<float, int8_t, 2>() {

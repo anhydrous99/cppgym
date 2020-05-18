@@ -5,7 +5,6 @@
 #include "CartPoleCPP.h"
 #include <algorithm>
 #include <cassert>
-#include <cmath>
 
 CartPoleCPP::CartPoleCPP() : EnvCPP<float, int8_t, 4>() {}
 

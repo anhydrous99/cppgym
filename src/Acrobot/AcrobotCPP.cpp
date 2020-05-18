@@ -7,7 +7,6 @@
 #include <algorithm>
 #include <cassert>
 #include <tuple>
-#include <cmath>
 
 AcrobotCPP::AcrobotCPP() : EnvCPP<float, int8_t, 6>() {}
 

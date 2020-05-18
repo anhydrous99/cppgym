@@ -4,6 +4,9 @@ project(cppgym)
 set(CMAKE_CXX_STANDARD 17)
 add_subdirectory(pybind11)
 
+include(CheckSymbolExists)
+check_symbol_exists(sincosf "cmath" HAVE_SINCOSF)
+
 pybind11_add_module(_CartPole
         src/EnvCPP.h
         src/CartPole/CartPoleBinder.cpp

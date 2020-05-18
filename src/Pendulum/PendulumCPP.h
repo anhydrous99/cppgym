@@ -6,7 +6,6 @@
 #define CPPGYM_PENDULUMCPP_H
 
 #include "../EnvCPP.h"
-#include <cmath>
 
 class PendulumCPP : public EnvCPP<float, float, 3> {
     std::uniform_real_distribution<float> dist1{-M_PI, M_PI};

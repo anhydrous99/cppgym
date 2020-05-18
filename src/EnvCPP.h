@@ -6,8 +6,20 @@
 #define CPPGYM_ENVCPP_H
 
 #include <array>
+#include <cmath>
 #include <random>
 #include <cstdint>
+
+#ifndef M_PIf32
+#define M_PIf32 3.14159265358979323846
+#endif
+
+#ifndef HAVE_SINCOSF
+inline void sincosf(float xx, float *s, float *c) {
+  *s = std::sin(xx);
+  *c = std::cos(xx);
+}
+#endif
 
 template <typename StateType, typename ActionType, int StateSize>
 class EnvCPP {

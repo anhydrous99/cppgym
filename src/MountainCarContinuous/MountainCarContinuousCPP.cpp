@@ -4,7 +4,6 @@
 
 #include <algorithm>
 #include <tuple>
-#include <cmath>
 #include "MountainCarContinuousCPP.h"
 
 MountainCarContinuousCPP::MountainCarContinuousCPP(float goal_velocity) : EnvCPP<float, float, 2>() {
