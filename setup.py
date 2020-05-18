@@ -71,7 +71,8 @@ setup(
     ext_modules=[CMakeExtension('cppgym.CartPoleCPP'),
                  CMakeExtension('cppgym.MountainCarCPP'),
                  CMakeExtension('cppgym.MountainCarContinuousCPP'),
-                 CMakeExtension('cppgym.PendulumCPP')],
+                 CMakeExtension('cppgym.PendulumCPP'),
+                 CMakeExtension('cppgym.AcrobotCPP')],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
     install_requires=[

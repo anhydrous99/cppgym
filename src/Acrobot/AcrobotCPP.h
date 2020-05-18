@@ -6,15 +6,14 @@
 #define CPPGYM_ACROBOT_H
 
 #include "../EnvCPP.h"
-#include <valarray>
+#include <functional>
 
 class AcrobotCPP : public EnvCPP<float, int8_t, 6> {
     std::uniform_real_distribution<float> dist{-0.1, 0.1};
-
     std::array<float, 6> get_obs();
     bool terminal();
-    std::valarray<float> dsdt(const std::array<float, 4> &s, float a);
-    void calc_rk4(const std::array<float, 5> &y0, const std::array<float, 2> &t);
+    void dsdt(float t, const float u[], float f[]) const;
+
 public:
     const float dt = 0.2f;
     const float link_length = 1.0f;
@@ -51,5 +50,8 @@ public:
     std::array<float, 6> reset() override;
 
 };
+
+void rk4(const std::function<void (float, const float*, float*)> &dydt, const float tspan[2],
+        const float y0[], int n, int m, float t[], float y[]);
 
 #endif //CPPGYM_ACROBOT_H

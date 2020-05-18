@@ -36,5 +36,7 @@ pybind11_add_module(_Pendulum
 
 pybind11_add_module(_Acrobot
         src/EnvCPP.h
+        src/Acrobot/ArcobotBinder.cpp
         src/Acrobot/AcrobotCPP.h
-        src/Acrobot/AcrobotCPP.cpp)
+        src/Acrobot/AcrobotCPP.cpp
+        src/Acrobot/rk4.cpp)

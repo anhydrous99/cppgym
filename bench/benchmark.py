@@ -66,6 +66,14 @@ def main():
     score, time = env_test(pendulum_cpp, n_episodes)
     print(f'gym: score - {score} - time - {time * 1000} ms')
 
+    print('Acrobot-v1')
+    pendulum_gym = gym.envs.make('Acrobot-v1')
+    score, time = env_test(pendulum_gym, n_episodes)
+    print(f'gym: score - {score} - time - {time * 1000} ms')
+    pendulum_cpp = cppgym.make('Acrobot-v1')
+    score, time = env_test(pendulum_cpp, n_episodes)
+    print(f'gym: score - {score} - time - {time * 1000} ms')
+
 
 if __name__ == "__main__":
     main()

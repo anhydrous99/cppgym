@@ -12,6 +12,9 @@ from .MountainCarContinuous import MountainCarContinuous
 from ._Pendulum import PendulumCPP
 from .Pendulum import Pendulum
 
+from ._Acrobot import AcrobotCPP
+from .Acrobot import Acrobot
+
 
 def make(env: str):
     from gym.wrappers.time_limit import TimeLimit
@@ -25,3 +28,5 @@ def make(env: str):
         return TimeLimit(MountainCarContinuous(), max_episode_steps=999)
     elif env == 'Pendulum-v0':
         return TimeLimit(Pendulum(), max_episode_steps=200)
+    elif env == 'Acrobot-v1':
+        return TimeLimit(Acrobot(), max_episode_steps=500)
