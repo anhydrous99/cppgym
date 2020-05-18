@@ -27,3 +27,8 @@ pybind11_add_module(_Pendulum
         src/Pendulum/PendulumBinder.cpp
         src/Pendulum/PendulumCPP.h
         src/Pendulum/PendulumCPP.cpp)
+
+pybind11_add_module(_Acrobot
+        src/EnvCPP.h
+        src/Acrobot/AcrobotCPP.h
+        src/Acrobot/AcrobotCPP.cpp)
