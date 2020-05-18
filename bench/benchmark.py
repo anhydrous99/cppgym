@@ -48,7 +48,7 @@ def main():
     print(f'gym: score - {score} - time - {time * 1000} ms')
     mountaincar_cpp = cppgym.make('MountainCar-v0')
     score, time = env_test(mountaincar_cpp, n_episodes)
-    print(f'gym: score - {score} - time - {time * 1000} ms')
+    print(f'cpp: score - {score} - time - {time * 1000} ms')
 
     print('MountainCarContinuous-v0')
     mountaincar_gym = gym.envs.make('MountainCarContinuous-v0')
@@ -56,7 +56,7 @@ def main():
     print(f'gym: score - {score} - time - {time * 1000} ms')
     mountaincar_cpp = cppgym.make('MountainCarContinuous-v0')
     score, time = env_test(mountaincar_cpp, n_episodes)
-    print(f'gym: score - {score} - time - {time * 1000} ms')
+    print(f'cpp: score - {score} - time - {time * 1000} ms')
 
     print('Pendulum-v0')
     pendulum_gym = gym.envs.make('Pendulum-v0')
@@ -64,7 +64,7 @@ def main():
     print(f'gym: score - {score} - time - {time * 1000} ms')
     pendulum_cpp = cppgym.make('Pendulum-v0')
     score, time = env_test(pendulum_cpp, n_episodes)
-    print(f'gym: score - {score} - time - {time * 1000} ms')
+    print(f'cpp: score - {score} - time - {time * 1000} ms')
 
     print('Acrobot-v1')
     pendulum_gym = gym.envs.make('Acrobot-v1')
@@ -72,7 +72,15 @@ def main():
     print(f'gym: score - {score} - time - {time * 1000} ms')
     pendulum_cpp = cppgym.make('Acrobot-v1')
     score, time = env_test(pendulum_cpp, n_episodes)
+    print(f'cpp: score - {score} - time - {time * 1000} ms')
+
+    print('Blackjack-v0')
+    pendulum_gym = gym.envs.make('Blackjack-v0')
+    score, time = env_test(pendulum_gym, n_episodes)
     print(f'gym: score - {score} - time - {time * 1000} ms')
+    pendulum_cpp = cppgym.make('Blackjack-v0')
+    score, time = env_test(pendulum_cpp, n_episodes)
+    print(f'cpp: score - {score} - time - {time * 1000} ms')
 
 
 if __name__ == "__main__":

@@ -15,6 +15,9 @@ from .Pendulum import Pendulum
 from ._Acrobot import AcrobotCPP
 from .Acrobot import Acrobot
 
+from ._BlackJack import BlackJackCPP
+from .BlackJack import BlackJack
+
 
 def make(env: str):
     from gym.wrappers.time_limit import TimeLimit
@@ -30,3 +33,5 @@ def make(env: str):
         return TimeLimit(Pendulum(), max_episode_steps=200)
     elif env == 'Acrobot-v1':
         return TimeLimit(Acrobot(), max_episode_steps=500)
+    elif env == 'Blackjack-v0':
+        return BlackJack()

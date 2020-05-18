@@ -72,7 +72,8 @@ setup(
                  CMakeExtension('cppgym.MountainCarCPP'),
                  CMakeExtension('cppgym.MountainCarContinuousCPP'),
                  CMakeExtension('cppgym.PendulumCPP'),
-                 CMakeExtension('cppgym.AcrobotCPP')],
+                 CMakeExtension('cppgym.AcrobotCPP'),
+                 CMakeExtension('cppgym.BlackJackCPP')],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
     install_requires=[

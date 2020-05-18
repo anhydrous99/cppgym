@@ -40,3 +40,9 @@ pybind11_add_module(_Acrobot
         src/Acrobot/AcrobotCPP.h
         src/Acrobot/AcrobotCPP.cpp
         src/Acrobot/rk4.cpp)
+
+pybind11_add_module(_BlackJack
+        src/EnvCPP.h
+        src/BlackJack/BlackJackBinder.cpp
+        src/BlackJack/BlackJackCPP.h
+        src/BlackJack/BlackJackCPP.cpp)
