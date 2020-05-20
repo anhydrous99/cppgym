@@ -51,7 +51,4 @@ public:
 
 };
 
-void rk4(const std::function<void (float, const float*, float*)> &dydt, const float tspan[2],
-        const float y0[], int n, int m, float t[], float y[]);
-
 #endif //CPPGYM_ACROBOT_H

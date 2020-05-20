@@ -9,7 +9,7 @@ static float cmp(int8_t a, int8_t b) {
     return static_cast<float>(a > b) - static_cast<float>(a < b);
 }
 
-BlackJackCPP::BlackJackCPP(bool natural) : EnvCPP<int8_t, int8_t, 3>(),
+BlackJackCPP::BlackJackCPP(bool natural) : EnvCPP<int8_t, int8_t, 3, 1>(),
         deck{1, 2, 3, 4, 5,
              6, 7, 8, 9, 10,
              10, 10, 10},

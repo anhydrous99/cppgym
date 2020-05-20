@@ -7,7 +7,7 @@
 
 #include "../EnvCPP.h"
 
-class BlackJackCPP : public EnvCPP<int8_t, int8_t, 3> {
+class BlackJackCPP : public EnvCPP<int8_t, int8_t, 3, 1> {
     std::array<int8_t, 13> deck;
     std::vector<int8_t> player;
     std::vector<int8_t> dealer;

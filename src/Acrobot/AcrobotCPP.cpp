@@ -36,8 +36,6 @@ std::tuple<std::array<float, 6>, float, bool> AcrobotCPP::step(int8_t action) {
     const std::array<float, 2> tspan{0.0f, dt};
     std::array<float, 2> t{0.0f};
     std::array<float, 10> y{0.0f};
-    rk4([&](float t, const float u[], float f[]) { dsdt(t, u, f); },
-            tspan.data(), s_augmented.data(), 1, 5, t.data(), y.data());
     _state[0] = wrap(y[5], -M_PIf32, M_PIf32);
     _state[1] = wrap(y[6], -M_PIf32, M_PIf32);
     _state[2] = bound(y[7], -max_vel_1, max_vel_1);

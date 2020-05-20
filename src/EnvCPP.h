@@ -21,36 +21,36 @@ inline void sincosf(float xx, float *s, float *c) {
 }
 #endif
 
-template <typename StateType, typename ActionType, int StateSize>
+template <typename StateType, typename ActionType, int ObsStateSize, int IntStateSize=ObsStateSize>
 class EnvCPP {
 protected:
     std::mt19937 _ran_generator;
-    std::array<StateType, StateSize> _state{0};
+    std::array<StateType, IntStateSize> _state{0};
     uint32_t _seed;
 
 public:
     EnvCPP();
     void set_seed(uint32_t seed);
     uint32_t get_seed();
-    virtual std::tuple<std::array<StateType, StateSize>, float, bool> step(ActionType action) = 0;
-    virtual std::array<StateType, StateSize> reset() = 0;
+    virtual std::tuple<std::array<StateType, ObsStateSize>, float, bool> step(ActionType action) = 0;
+    virtual std::array<StateType, ObsStateSize> reset() = 0;
 };
 
 // -- Implementation --
 
-template <typename StateType, typename ActionType, int StateSize>
-EnvCPP<StateType, ActionType, StateSize>::EnvCPP() : _seed((std::random_device())()) {
+template <typename StateType, typename ActionType, int StateSize, int IntStateSize>
+EnvCPP<StateType, ActionType, StateSize, IntStateSize>::EnvCPP() : _seed((std::random_device())()) {
     _ran_generator = std::mt19937(_seed);
 }
 
-template <typename StateType, typename ActionType, int StateSize>
-void EnvCPP<StateType, ActionType, StateSize>::set_seed(uint32_t seed) {
+template <typename StateType, typename ActionType, int StateSize, int IntStateSize>
+void EnvCPP<StateType, ActionType, StateSize, IntStateSize>::set_seed(uint32_t seed) {
     _seed = seed;
     _ran_generator = std::mt19937(seed);
 }
 
-template <typename StateType, typename ActionType, int StateSize>
-uint32_t EnvCPP<StateType, ActionType, StateSize>::get_seed() {
+template <typename StateType, typename ActionType, int StateSize, int IntStateSize>
+uint32_t EnvCPP<StateType, ActionType, StateSize, IntStateSize>::get_seed() {
     return _seed;
 }
 

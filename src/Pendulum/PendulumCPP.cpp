@@ -10,12 +10,12 @@ float angle_normalized(float x) {
     return x - pi2 * std::floor((x + M_PIf32) / pi2);
 }
 
-PendulumCPP::PendulumCPP(float g) : EnvCPP<float, float, 3>() {
+PendulumCPP::PendulumCPP(float g) : EnvCPP<float, float, 3, 2>() {
     this->g = g;
 }
 
 std::tuple<std::array<float, 3>, float, bool> PendulumCPP::step(float action) {
-    auto& [th, thdot, _] = _state;
+    auto& [th, thdot] = _state;
 
     action = std::clamp(action, -max_torque, max_torque);
     last_u = action;
