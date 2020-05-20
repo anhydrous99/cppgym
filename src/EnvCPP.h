@@ -45,6 +45,7 @@ EnvCPP<StateType, ActionType, StateSize>::EnvCPP() : _seed((std::random_device()
 
 template <typename StateType, typename ActionType, int StateSize>
 void EnvCPP<StateType, ActionType, StateSize>::set_seed(uint32_t seed) {
+    _seed = seed;
     _ran_generator = std::mt19937(seed);
 }
 

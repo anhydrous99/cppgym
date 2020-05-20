@@ -33,23 +33,22 @@ std::tuple<std::array<float, 6>, float, bool> AcrobotCPP::step(int8_t action) {
         torque += tmp_dist(_ran_generator);
     }
     const std::array<float, 5> s_augmented{ _state[0], _state[1], _state[2], _state[3],  torque};
-    const std::array<float, 2> tspan{ 0.0f, dt };
-    std::array<float, 2> t{ 0.0f };
-    std::array<float, 5> y{ 0.0f };
+    const std::array<float, 2> tspan{0.0f, dt};
+    std::array<float, 2> t{0.0f};
+    std::array<float, 10> y{0.0f};
     rk4([&](float t, const float u[], float f[]) { dsdt(t, u, f); },
             tspan.data(), s_augmented.data(), 1, 5, t.data(), y.data());
-    std::array<float, 4> ns{y[0], y[1], y[2], y[3]};
-    _state[0] = wrap(ns[0], -M_PIf32, M_PIf32);
-    _state[1] = wrap(ns[1], -M_PIf32, M_PIf32);
-    _state[2] = bound(ns[2], -max_vel_1, max_vel_1);
-    _state[3] = bound(ns[3], -max_vel_2, max_vel_2);
+    _state[0] = wrap(y[5], -M_PIf32, M_PIf32);
+    _state[1] = wrap(y[6], -M_PIf32, M_PIf32);
+    _state[2] = bound(y[7], -max_vel_1, max_vel_1);
+    _state[3] = bound(y[8], -max_vel_2, max_vel_2);
     bool term = terminal();
     float reward = (!term) ? -1.0f : 0.0f;
     return std::make_tuple(get_obs(), reward, term);
 }
 
 std::array<float, 6> AcrobotCPP::reset() {
-    std::generate(_state.begin(), _state.end(), [&](){ return dist(_ran_generator); });
+    std::generate(_state.begin(), _state.begin() + 5, [&](){ return dist(_ran_generator); });
     return get_obs();
 }
 

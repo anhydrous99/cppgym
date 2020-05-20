@@ -9,10 +9,10 @@ import gym
 env = cppgym.make('Acrobot-v1')
 #env = gym.make('Acrobot-v1')
 model = PPO2(MlpPolicy, env, verbose=1)
-model.learn(total_timesteps=100000)
+model.learn(total_timesteps=10000)
 
 reward_arr = []
-for i in range(1000):
+for i in range(100):
     episode_reward = 0
     obs = env.reset()
     while True:

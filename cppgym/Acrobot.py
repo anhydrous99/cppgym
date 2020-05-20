@@ -10,7 +10,7 @@ from numpy import sin, cos, pi
 class Acrobot(gym.Env):
     metadata = {
         'render.modes': ['human', 'rgb_array'],
-        'video.frames_per_second': 50
+        'video.frames_per_second': 15
     }
 
     def __init__(self):
@@ -54,12 +54,16 @@ class Acrobot(gym.Env):
 
     def render(self, mode='human'):
         from gym.envs.classic_control import rendering
+
         s = self.state
+
         if self.viewer is None:
-            self.viewer = rendering.Viewer(500, 500)
-            bound = self.LINK_LENGTH_1 + self.LINK_LENGTH_2 + 0.2
-            self.viewer.set_bounds(-bound, bound, -bound, bound)
+            self.viewer = rendering.Viewer(500,500)
+            bound = self.LINK_LENGTH_1 + self.LINK_LENGTH_2 + 0.2  # 2.2 for default
+            self.viewer.set_bounds(-bound,bound,-bound,bound)
+
         if s is None: return None
+
         p1 = [-self.LINK_LENGTH_1 *
               cos(s[0]), self.LINK_LENGTH_1 * sin(s[0])]
 
@@ -81,4 +85,4 @@ class Acrobot(gym.Env):
             circ.set_color(.8, .8, 0)
             circ.add_attr(jtransform)
 
-        return self.viewer.render(return_rgb_array=mode == 'rgb_array')
+        return self.viewer.render(return_rgb_array = mode=='rgb_array')
