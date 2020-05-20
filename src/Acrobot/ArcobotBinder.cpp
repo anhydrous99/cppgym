@@ -16,6 +16,7 @@ PYBIND11_MODULE(_Acrobot, m) {
             .def("get_seed", &AcrobotCPP::get_seed)
             .def("step", &AcrobotCPP::step)
             .def("reset", &AcrobotCPP::reset)
+            .def("raw_state", &AcrobotCPP::raw_state)
             .def_readonly("dt", &AcrobotCPP::dt)
             .def_readonly("link_length", &AcrobotCPP::link_length)
             .def_readonly("link_mass", &AcrobotCPP::link_mass)

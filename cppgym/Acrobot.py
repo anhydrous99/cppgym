@@ -10,7 +10,7 @@ from numpy import sin, cos, pi
 class Acrobot(gym.Env):
     metadata = {
         'render.modes': ['human', 'rgb_array'],
-        'video.frames_per_second': 10
+        'video.frames_per_second': 15
     }
 
     def __init__(self):
@@ -27,8 +27,7 @@ class Acrobot(gym.Env):
         self.torque_noise_max = 0.
 
         high = np.array([1.0, 1.0, 1.0, 1.0, self.MAX_VEL_1, self.MAX_VEL_2], dtype=np.float32)
-        low = -high
-        self.observation_space = spaces.Box(low=low, high=high, dtype=np.float32)
+        self.observation_space = spaces.Box(low=-high, high=high, dtype=np.float32)
         self.action_space = spaces.Discrete(3)
         self.state = None
 
@@ -55,7 +54,7 @@ class Acrobot(gym.Env):
     def render(self, mode='human'):
         from gym.envs.classic_control import rendering
 
-        s = self.state
+        s = np.array(self.env.raw_state())
 
         if self.viewer is None:
             self.viewer = rendering.Viewer(500,500)
@@ -85,4 +84,4 @@ class Acrobot(gym.Env):
             circ.set_color(.8, .8, 0)
             circ.add_attr(jtransform)
 
-        return self.viewer.render(return_rgb_array = mode=='rgb_array')
+        return self.viewer.render(return_rgb_array=mode == 'rgb_array')

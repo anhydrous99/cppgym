@@ -8,19 +8,15 @@
 #include <cassert>
 #include <tuple>
 
-AcrobotCPP::AcrobotCPP() : EnvCPP<float, int8_t, 6>() {}
+AcrobotCPP::AcrobotCPP() : EnvCPP<float, int8_t, 6, 4>() {}
 
 float wrap(float x, float m, float M) {
     float diff = M - m;
     while (x > M)
-        x = x - diff;
+        x -= diff;
     while (x < m)
-        x = x + diff;
+        x += diff;
     return x;
-}
-
-float bound(float x, float m, float M) {
-    return std::min(std::max(x, m), M);
 }
 
 std::tuple<std::array<float, 6>, float, bool> AcrobotCPP::step(int8_t action) {
@@ -32,21 +28,27 @@ std::tuple<std::array<float, 6>, float, bool> AcrobotCPP::step(int8_t action) {
         std::uniform_real_distribution<float> tmp_dist(-torque_noise_max, torque_noise_max);
         torque += tmp_dist(_ran_generator);
     }
-    const std::array<float, 5> s_augmented{ _state[0], _state[1], _state[2], _state[3],  torque};
-    const std::array<float, 2> tspan{0.0f, dt};
-    std::array<float, 2> t{0.0f};
-    std::array<float, 10> y{0.0f};
-    _state[0] = wrap(y[5], -M_PIf32, M_PIf32);
-    _state[1] = wrap(y[6], -M_PIf32, M_PIf32);
-    _state[2] = bound(y[7], -max_vel_1, max_vel_1);
-    _state[3] = bound(y[8], -max_vel_2, max_vel_2);
+
+    // RK4 - single step
+    const std::valarray<float> y0{_state[0], _state[1], _state[2], _state[3], torque};
+    const float dt2 = dt / 2.0f;
+    std::valarray<float> k1 = dsdt(y0);
+    std::valarray<float> k2 = dsdt(y0 + dt2 * k1);
+    std::valarray<float> k3 = dsdt(y0 + dt2 * k2);
+    std::valarray<float> k4 = dsdt(y0 + dt * k3);
+    std::valarray<float> y = y0 + dt / 6.0 * (k1 + 2 * k2 + 2 * k3 + k4);
+
+    _state[0] = wrap(y[0], -M_PIf32, M_PIf32);
+    _state[1] = wrap(y[1], -M_PIf32, M_PIf32);
+    _state[2] = std::clamp(y[2], -max_vel_1, max_vel_1);
+    _state[3] = std::clamp(y[3], -max_vel_2, max_vel_2);
     bool term = terminal();
     float reward = (!term) ? -1.0f : 0.0f;
     return std::make_tuple(get_obs(), reward, term);
 }
 
 std::array<float, 6> AcrobotCPP::reset() {
-    std::generate(_state.begin(), _state.begin() + 5, [&](){ return dist(_ran_generator); });
+    std::generate(_state.begin(), _state.end(), [&](){ return dist(_ran_generator); });
     return get_obs();
 }
 
@@ -61,29 +63,24 @@ bool AcrobotCPP::terminal() {
     return ((-std::cos(_state[0]) - std::cos(_state[1] + _state[0])) > 1.0f);
 }
 
-void AcrobotCPP::dsdt(float t, const float u[], float f[]) const {
-    //auto [theta1, theta2, dtheta1, dtheta2] = u;
+std::valarray<float> AcrobotCPP::dsdt(const std::valarray<float> &u) const {
     const float theta1 = u[0];
     const float theta2 = u[1];
     const float dtheta1 = u[2];
     const float dtheta2 = u[3];
     const float a = u[4];
-    // Calculate the sine and cosine of theta1 and theta2
-    float stheta1, ctheta1, stheta2, ctheta2;
-    sincosf(theta1, &stheta1, &ctheta1);
-    sincosf(theta2, &stheta2, &ctheta2);
 
-    // Calculate d1
-    const float d1 = I2 + mllp2lclc + mllc2 * ctheta2;
-    const float d2 = I + mllc * ctheta2 + mlclc;
-    const float phi2 = glcm * std::sin(theta1 + theta2);
-    const float phi1 = gmlplc * stheta1 - mllc * dtheta2 * (2.0f * dtheta1 + dtheta2) * stheta2 + phi2;
-    const float ddtheta2 = (d1 * (phi2 - a) - d2 * phi1 + mllc * d1 * dtheta1 * dtheta1 * stheta2) /
-            (d2 * d2 - d1 * (mlclc + I));
+    const float d1 = m * lc * lc + m * (l * l + lc * lc + 2 * l * lc * std::cos(theta2)) + 2 * I;
+    const float d2 = m * (lc * lc + l * lc * std::cos(theta2)) + I;
+    const float phi2 = m * lc * g * std::cos(theta1 + theta2 - M_PIf32 / 2.0f);
+    const float phi1 = - m * l * lc * dtheta2 * dtheta2 * std::sin(theta2) - 2 * m * l * lc * dtheta2 * dtheta1 *
+            std::sin(theta2) + (m * lc + m * l) * g * std::cos(theta1 - M_PIf32 / 2.0f) + phi2;
+    const float ddtheta2 = (a + d2 / d1 * phi1 - m * l * lc * dtheta1 * dtheta1 * std::sin(theta2) - phi2) /
+            (m * lc * lc + I - d2 * d2 / d1);
     const float ddtheta1 = -(d2 * ddtheta2 + phi1) / d1;
-    f[0] = dtheta1;
-    f[1] = dtheta2;
-    f[2] = ddtheta1;
-    f[3] = ddtheta2;
-    f[4] = 0.0f;
+    return {dtheta1, dtheta2, ddtheta1, ddtheta2, 0.0f};
+}
+
+std::array<float, 4> AcrobotCPP::raw_state() {
+    return _state;
 }
