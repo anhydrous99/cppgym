@@ -1,22 +1,16 @@
 # __init__.py
 
-from ._CartPole import CartPoleCPP
-from .CartPole import CartPole
+from .ClassicControl.CartPole import CartPole
 
-from ._MountainCar import MountainCarCPP
-from .MountainCar import MountainCar
+from .ClassicControl.MountainCar import MountainCar
 
-from ._MountainCarContinuous import MountainCarContinuousCPP
-from .MountainCarContinuous import MountainCarContinuous
+from .ClassicControl.MountainCarContinuous import MountainCarContinuous
 
-from ._Pendulum import PendulumCPP
-from .Pendulum import Pendulum
+from .ClassicControl.Pendulum import Pendulum
 
-from ._Acrobot import AcrobotCPP
-from .Acrobot import Acrobot
+from .ClassicControl.Acrobot import Acrobot
 
-from ._BlackJack import BlackJackCPP
-from .BlackJack import BlackJack
+from .ToyText.BlackJack import BlackJack
 
 
 def make(env: str):

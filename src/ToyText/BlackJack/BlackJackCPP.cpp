@@ -4,6 +4,7 @@
 
 #include "BlackJackCPP.h"
 #include <algorithm>
+#include <numeric>
 
 static float cmp(int8_t a, int8_t b) {
     return static_cast<float>(a > b) - static_cast<float>(a < b);
@@ -17,8 +18,8 @@ BlackJackCPP::BlackJackCPP(bool natural) : EnvCPP<int8_t, int8_t, 3, 1>(),
         {}
 
 int8_t BlackJackCPP::draw_card() {
-    std::uniform_int_distribution<int8_t> distribution(0, deck.size() - 1);
-    return deck[distribution(_ran_generator)];
+    std::uniform_int_distribution<int32_t> distribution(0, deck.size() - 1);
+    return deck[static_cast<int8_t>(distribution(_ran_generator))];
 }
 
 std::vector<int8_t> BlackJackCPP::draw_hand() {

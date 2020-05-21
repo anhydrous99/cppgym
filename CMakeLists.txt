@@ -11,37 +11,37 @@ if (HAVE_SINCOSF)
 endif ()
 
 pybind11_add_module(_CartPole
-        src/EnvCPP.h
-        src/CartPole/CartPoleBinder.cpp
-        src/CartPole/CartPoleCPP.h
-        src/CartPole/CartPoleCPP.cpp)
+        src/ClassicControl/EnvCPP.h
+        src/ClassicControl/CartPole/CartPoleBinder.cpp
+        src/ClassicControl/CartPole/CartPoleCPP.h
+        src/ClassicControl/CartPole/CartPoleCPP.cpp)
 
 pybind11_add_module(_MountainCar
-        src/EnvCPP.h
-        src/MountainCar/MountainCarBinder.cpp
-        src/MountainCar/MountainCarCPP.h
-        src/MountainCar/MountainCarCPP.cpp)
+        src/ClassicControl/EnvCPP.h
+        src/ClassicControl/MountainCar/MountainCarBinder.cpp
+        src/ClassicControl/MountainCar/MountainCarCPP.h
+        src/ClassicControl/MountainCar/MountainCarCPP.cpp)
 
 pybind11_add_module(_MountainCarContinuous
-        src/EnvCPP.h
-        src/MountainCarContinuous/MountainCarContinuousBinder.cpp
-        src/MountainCarContinuous/MountainCarContinuousCPP.h
-        src/MountainCarContinuous/MountainCarContinuousCPP.cpp)
+        src/ClassicControl/EnvCPP.h
+        src/ClassicControl/MountainCarContinuous/MountainCarContinuousBinder.cpp
+        src/ClassicControl/MountainCarContinuous/MountainCarContinuousCPP.h
+        src/ClassicControl/MountainCarContinuous/MountainCarContinuousCPP.cpp)
 
 pybind11_add_module(_Pendulum
-        src/EnvCPP.h
-        src/Pendulum/PendulumBinder.cpp
-        src/Pendulum/PendulumCPP.h
-        src/Pendulum/PendulumCPP.cpp)
+        src/ClassicControl/EnvCPP.h
+        src/ClassicControl/Pendulum/PendulumBinder.cpp
+        src/ClassicControl/Pendulum/PendulumCPP.h
+        src/ClassicControl/Pendulum/PendulumCPP.cpp)
 
 pybind11_add_module(_Acrobot
-        src/EnvCPP.h
-        src/Acrobot/ArcobotBinder.cpp
-        src/Acrobot/AcrobotCPP.h
-        src/Acrobot/AcrobotCPP.cpp)
+        src/ClassicControl/EnvCPP.h
+        src/ClassicControl/Acrobot/ArcobotBinder.cpp
+        src/ClassicControl/Acrobot/AcrobotCPP.h
+        src/ClassicControl/Acrobot/AcrobotCPP.cpp)
 
 pybind11_add_module(_BlackJack
-        src/EnvCPP.h
-        src/BlackJack/BlackJackBinder.cpp
-        src/BlackJack/BlackJackCPP.h
-        src/BlackJack/BlackJackCPP.cpp)
+        src/ClassicControl/EnvCPP.h
+        src/ToyText/BlackJack/BlackJackBinder.cpp
+        src/ToyText/BlackJack/BlackJackCPP.h
+        src/ToyText/BlackJack/BlackJackCPP.cpp)

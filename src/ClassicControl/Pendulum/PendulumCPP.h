@@ -8,7 +8,7 @@
 #include "../EnvCPP.h"
 
 class PendulumCPP : public EnvCPP<float, float, 3, 2> {
-    std::uniform_real_distribution<float> dist1{-M_PI, M_PI};
+    std::uniform_real_distribution<float> dist1{-M_PIf32, M_PIf32};
     std::uniform_real_distribution<float> dist2{-1, 1};
 
     std::array<float, 3> get_obs();

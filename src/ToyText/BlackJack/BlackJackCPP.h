@@ -5,7 +5,7 @@
 #ifndef CPPGYM_BLACKJACKCPP_H
 #define CPPGYM_BLACKJACKCPP_H
 
-#include "../EnvCPP.h"
+#include "../../ClassicControl/EnvCPP.h"
 
 class BlackJackCPP : public EnvCPP<int8_t, int8_t, 3, 1> {
     std::array<int8_t, 13> deck;

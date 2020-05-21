@@ -21,7 +21,7 @@ public:
     const float force_mag = 10.0;
     const float tau = 0.02;
     const float x_threshold = 2.4;
-    const float theta_threshold_radians = 12 * 2 * M_PI / 360;
+    const float theta_threshold_radians = 12 * 2 * M_PIf32 / 360;
     const float fourthirds = 4.0f / 3.0f;
     const float polemassfrac = masspole / total_mass;
     const float polemasslengthfrac = polemass_length / total_mass;

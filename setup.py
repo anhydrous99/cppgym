@@ -67,17 +67,17 @@ setup(
     author_email='armando.herrera02@utrgv.edu',
     description='A reimplementation of some of OpenAI gym\' environments',
     long_description='A reimplementation of some of OpenAI gym\' environments with a focus on performance',
-    packages=['cppgym'],
-    ext_modules=[CMakeExtension('cppgym.CartPoleCPP'),
-                 CMakeExtension('cppgym.MountainCarCPP'),
-                 CMakeExtension('cppgym.MountainCarContinuousCPP'),
-                 CMakeExtension('cppgym.PendulumCPP'),
-                 CMakeExtension('cppgym.AcrobotCPP'),
-                 CMakeExtension('cppgym.BlackJackCPP')],
+    packages=find_packages(),
+    ext_modules=[CMakeExtension('cppgym.ClassicControl.CartPoleCPP'),
+                 CMakeExtension('cppgym.ClassicControl.MountainCarCPP'),
+                 CMakeExtension('cppgym.ClassicControl.MountainCarContinuousCPP'),
+                 CMakeExtension('cppgym.ClassicControl.PendulumCPP'),
+                 CMakeExtension('cppgym.ClassicControl.AcrobotCPP'),
+                 CMakeExtension('cppgym.ToyText.BlackJackCPP')],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
     install_requires=[
-        'gym>=0.17.2'
+        'gym>=0.17.2',
         'numpy>=1.18.1'
     ]
 )
