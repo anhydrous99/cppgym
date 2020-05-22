@@ -3,7 +3,6 @@ project(cppgym)
 
 set(CMAKE_CXX_STANDARD 17)
 add_subdirectory(extern/pybind11)
-add_subdirectory(extern/Box2D)
 
 include(CheckCXXSymbolExists)
 check_cxx_symbol_exists(sincosf "math.h" HAVE_SINCOSF)
@@ -58,12 +57,3 @@ pybind11_add_module(_BlackJack
         src/ToyText/BlackJack/BlackJackBinder.cpp
         src/ToyText/BlackJack/BlackJackCPP.h
         src/ToyText/BlackJack/BlackJackCPP.cpp)
-
-pybind11_add_module(_BiPedalWalker MODULE
-        src/EnvCPP.h
-        src/EnvCPP.cpp
-        src/Box2D/BipedalWalker/ContactDetector.h
-        src/Box2D/BipedalWalker/ContactDetector.cpp
-        src/Box2D/BipedalWalker/BiPedalWalkerCPP.h
-        src/Box2D/BipedalWalker/BiPedalWalkerCPP.cpp)
-target_link_libraries(_BiPedalWalker PRIVATE box2d)
