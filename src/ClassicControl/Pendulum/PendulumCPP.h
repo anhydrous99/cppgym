@@ -5,9 +5,9 @@
 #ifndef CPPGYM_PENDULUMCPP_H
 #define CPPGYM_PENDULUMCPP_H
 
-#include "../EnvCPP.h"
+#include "../ClassicEnvCPP.h"
 
-class PendulumCPP : public EnvCPP<float, float, 3, 2> {
+class PendulumCPP : public ClassicEnvCPP<float, float, 3, 2> {
     std::uniform_real_distribution<float> dist1{-M_PIf32, M_PIf32};
     std::uniform_real_distribution<float> dist2{-1, 1};
 

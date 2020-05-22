@@ -6,7 +6,7 @@
 #include <tuple>
 #include "MountainCarContinuousCPP.h"
 
-MountainCarContinuousCPP::MountainCarContinuousCPP(float goal_velocity) : EnvCPP<float, float, 2>() {
+MountainCarContinuousCPP::MountainCarContinuousCPP(float goal_velocity) : ClassicEnvCPP<float, float, 2>() {
     this->goal_velocity = goal_velocity;
 }
 

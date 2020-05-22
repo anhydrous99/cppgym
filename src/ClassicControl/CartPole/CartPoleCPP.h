@@ -6,9 +6,9 @@
 #define CPPGYM_CARTPOLECPP_H
 
 
-#include "../EnvCPP.h"
+#include "../ClassicEnvCPP.h"
 
-class CartPoleCPP : public EnvCPP<float, int8_t, 4> {
+class CartPoleCPP : public ClassicEnvCPP<float, int8_t, 4> {
     std::uniform_real_distribution<float> dist{-0.05, 0.05};
     int _steps_beyond_done = -1;
 public:

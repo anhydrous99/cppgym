@@ -10,7 +10,7 @@ float angle_normalized(float x) {
     return x - pi2 * std::floor((x + M_PIf32) / pi2);
 }
 
-PendulumCPP::PendulumCPP(float g) : EnvCPP<float, float, 3, 2>() {
+PendulumCPP::PendulumCPP(float g) : ClassicEnvCPP<float, float, 3, 2>() {
     this->g = g;
 }
 

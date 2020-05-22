@@ -5,10 +5,10 @@
 #ifndef CPPGYM_ACROBOT_H
 #define CPPGYM_ACROBOT_H
 
-#include "../EnvCPP.h"
+#include "../ClassicEnvCPP.h"
 #include <valarray>
 
-class AcrobotCPP : public EnvCPP<float, int8_t, 6, 4> {
+class AcrobotCPP : public ClassicEnvCPP<float, int8_t, 6, 4> {
     std::uniform_real_distribution<float> dist{-0.1, 0.1};
     std::array<float, 6> get_obs();
     bool terminal();

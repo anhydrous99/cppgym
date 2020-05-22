@@ -8,7 +8,7 @@
 #include <cassert>
 #include <tuple>
 
-AcrobotCPP::AcrobotCPP() : EnvCPP<float, int8_t, 6, 4>() {}
+AcrobotCPP::AcrobotCPP() : ClassicEnvCPP<float, int8_t, 6, 4>() {}
 
 float wrap(float x, float m, float M) {
     float diff = M - m;

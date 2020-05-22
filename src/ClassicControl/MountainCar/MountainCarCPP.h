@@ -5,9 +5,9 @@
 #ifndef CPPGYM_MOUNTAINCARCPP_H
 #define CPPGYM_MOUNTAINCARCPP_H
 
-#include "../EnvCPP.h"
+#include "../ClassicEnvCPP.h"
 
-class MountainCarCPP : public EnvCPP<float, int8_t, 2> {
+class MountainCarCPP : public ClassicEnvCPP<float, int8_t, 2> {
     std::uniform_real_distribution<float> dist{-0.6, -0.4};
 public:
     const float min_position = -1.2;

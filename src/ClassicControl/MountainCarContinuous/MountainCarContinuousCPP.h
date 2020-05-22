@@ -5,9 +5,9 @@
 #ifndef CPPGYM_MOUNTAINCARCONTINUOUS_H
 #define CPPGYM_MOUNTAINCARCONTINUOUS_H
 
-#include "../EnvCPP.h"
+#include "../ClassicEnvCPP.h"
 
-class MountainCarContinuousCPP : public EnvCPP<float, float, 2> {
+class MountainCarContinuousCPP : public ClassicEnvCPP<float, float, 2> {
     std::uniform_real_distribution<float> dist{-0.6, -0.4};
 public:
     const float min_action = -1.0;
