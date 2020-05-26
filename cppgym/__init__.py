@@ -12,6 +12,8 @@ from .ClassicControl.Acrobot import Acrobot
 
 from .ToyText.BlackJack import BlackJack
 
+from .ToyText.HotterColder import HotterColder
+
 
 def make(env: str):
     from gym.wrappers.time_limit import TimeLimit
@@ -29,3 +31,5 @@ def make(env: str):
         return TimeLimit(Acrobot(), max_episode_steps=500)
     elif env == 'Blackjack-v0':
         return BlackJack()
+    elif env == 'HotterColder-v0':
+        return TimeLimit(HotterColder(), max_episode_steps=200)

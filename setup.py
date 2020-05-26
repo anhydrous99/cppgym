@@ -73,7 +73,8 @@ setup(
                  CMakeExtension('cppgym.ClassicControl.MountainCarContinuousCPP'),
                  CMakeExtension('cppgym.ClassicControl.PendulumCPP'),
                  CMakeExtension('cppgym.ClassicControl.AcrobotCPP'),
-                 CMakeExtension('cppgym.ToyText.BlackJackCPP')],
+                 CMakeExtension('cppgym.ToyText.BlackJackCPP'),
+                 CMakeExtension('cppgym.ToyText.HotterColderCPP')],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
     install_requires=[

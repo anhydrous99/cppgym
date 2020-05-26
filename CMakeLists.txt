@@ -53,7 +53,13 @@ pybind11_add_module(_Acrobot
 pybind11_add_module(_BlackJack
         src/EnvCPP.h
         src/EnvCPP.cpp
-        src/ClassicControl/ClassicEnvCPP.h
         src/ToyText/BlackJack/BlackJackBinder.cpp
         src/ToyText/BlackJack/BlackJackCPP.h
         src/ToyText/BlackJack/BlackJackCPP.cpp)
+
+pybind11_add_module(_HotterColder
+        src/EnvCPP.h
+        src/EnvCPP.cpp
+        src/ToyText/HotterColder/HotterColderBinder.cpp
+        src/ToyText/HotterColder/HotterColderCPP.h
+        src/ToyText/HotterColder/HotterColderCPP.cpp)
