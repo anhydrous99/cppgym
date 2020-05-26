@@ -1,4 +1,4 @@
-from ._BlackJack import BlackJackCPP
+from .._BlackJack import BlackJackCPP
 
 import gym
 import ctypes

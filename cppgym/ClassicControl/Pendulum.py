@@ -1,4 +1,4 @@
-from ._Pendulum import PendulumCPP
+from .._Pendulum import PendulumCPP
 
 import gym
 import ctypes

@@ -1,4 +1,4 @@
-from ._HotterColder import HotterColderCPP
+from .._HotterColder import HotterColderCPP
 
 import gym
 import ctypes

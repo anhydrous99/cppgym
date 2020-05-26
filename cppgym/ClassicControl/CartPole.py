@@ -1,4 +1,4 @@
-from ._CartPole import CartPoleCPP
+from .._CartPole import CartPoleCPP
 
 import gym
 import ctypes

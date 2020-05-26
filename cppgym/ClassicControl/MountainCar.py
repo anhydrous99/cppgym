@@ -1,4 +1,4 @@
-from ._MountainCar import MountainCarCPP
+from .._MountainCar import MountainCarCPP
 
 import gym
 import math

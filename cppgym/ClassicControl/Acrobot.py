@@ -1,4 +1,4 @@
-from ._Acrobot import AcrobotCPP
+from .._Acrobot import AcrobotCPP
 
 import gym
 import ctypes
